@@ -1,9 +1,13 @@
 package com.caltuntas.cardgame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 	private int health;
 	private int mana;
 	private Deck deck;
+	private List<DamageCard> cardsOnHand = new ArrayList<DamageCard>();
 
 	public Player(int health, int mana, Deck deck) {
 		this.health = health;
@@ -39,4 +43,11 @@ public class Player {
 		this.deck = deck;
 	}
 
+	public List<DamageCard> getCardsOnHand() {
+		return cardsOnHand;
+	}
+
+	public void setCardsOnHand(List<DamageCard> cardsOnHand) {
+		this.cardsOnHand = cardsOnHand;
+	}
 }

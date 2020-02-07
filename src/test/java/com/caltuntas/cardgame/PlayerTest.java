@@ -23,6 +23,12 @@ public class PlayerTest {
 	}
 	
 	@Test
+	public void afterCreatePlayerCurrentCardShouldBeNull() {
+		Player player = new Player(30,0,createTestDeck());
+		assertEquals(0, player.getCardsOnHand().size());
+	}
+	
+	@Test
 	public void activatePlayer() {
 		Player player = new Player(30,0, createTestDeck());
 		assertEquals(0, player.getMana());
