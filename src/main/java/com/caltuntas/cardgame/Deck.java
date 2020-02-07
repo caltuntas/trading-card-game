@@ -11,8 +11,11 @@ public class Deck {
 		return cards.size();
 	}
 
-	public void add(DamageCard card) {
-		this.cards.add(card);		
+	public void add(DamageCard ...cards) {
+		for (int i = 0; i < cards.length; i++) {
+			DamageCard card = cards[i];
+			this.cards.add(card);		
+		}
 	}
 
 	public List<DamageCard> receiveRandom(int cardCount) {

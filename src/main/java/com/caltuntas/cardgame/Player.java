@@ -3,10 +3,12 @@ package com.caltuntas.cardgame;
 public class Player {
 	private int health;
 	private int mana;
+	private Deck deck;
 
-	public Player(int health, int mana) {
+	public Player(int health, int mana, Deck deck) {
 		this.health = health;
 		this.mana = mana;
+		this.deck = deck;
 	}
 
 	public int getHealth() {
@@ -27,6 +29,14 @@ public class Player {
 
 	public void activate() {
 		this.mana += 1;		
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public void setDeck(Deck deck) {
+		this.deck = deck;
 	}
 
 }
