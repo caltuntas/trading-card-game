@@ -25,4 +25,8 @@ public class Player {
 		this.mana = mana;
 	}
 
+	public void activate() {
+		this.mana += 1;		
+	}
+
 }
