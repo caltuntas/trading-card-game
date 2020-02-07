@@ -1,4 +1,4 @@
-package com.caltuntas;
+package com.caltuntas.cardgame;
 
 public class Main {
 
