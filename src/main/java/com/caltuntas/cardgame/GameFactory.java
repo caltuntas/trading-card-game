@@ -4,16 +4,18 @@ public class GameFactory {
 
 	public Game create() {
 		Game game = new Game();
-		Player player1 = createPlayer();
-		Player player2 = createPlayer();
+		Deck starterDeck = Deck.createWithManaCosts(0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8);
+		game.setStarterDeck(starterDeck);
+		Player player1 = createPlayer(game);
+		Player player2 = createPlayer(game);
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
 		return game;
 	}
 
-	private Player createPlayer() {
-		Deck deck1 = Deck.createWithManaCosts(0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8);
-		Player player1 = new Player(30, 0, deck1);
+	private Player createPlayer(Game game) {
+		Player player1 = new Player(30, 0, Deck.copy(game.getStarterDeck()));
+		player1.drawCards(3);
 		return player1;
 	}
 

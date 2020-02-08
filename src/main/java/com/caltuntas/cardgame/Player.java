@@ -50,4 +50,8 @@ public class Player {
 	public void setCardsOnHand(List<DamageCard> cardsOnHand) {
 		this.cardsOnHand = cardsOnHand;
 	}
+
+	public void drawCards(int cardCount) {
+		setCardsOnHand(this.deck.drawRandom(cardCount));		
+	}
 }

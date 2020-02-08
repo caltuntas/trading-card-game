@@ -48,5 +48,7 @@ public class DeckTest {
 		assertEquals(2,cards.size()) ;
 		assertEquals(1,deck.getDamageCardCount()) ;
 	}
+	
+	//TODO: test drawing more cards than a deck has
 
 }

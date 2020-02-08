@@ -16,6 +16,16 @@ public class Deck {
 		}
 		return deck;
 	}
+	
+	public static Deck copy(Deck originalDeck) {
+		Deck copyDeck = new Deck();
+		for (DamageCard originalCard : originalDeck.getCards()) {
+			DamageCard copyCard = new DamageCard(originalCard.getManaCost());			
+			copyDeck.add(copyCard);
+		}
+		return copyDeck;
+	}
+	
 
 	public int getDamageCardCount() {
 		return cards.size();

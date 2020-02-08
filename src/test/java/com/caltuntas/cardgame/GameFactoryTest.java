@@ -13,6 +13,12 @@ public class GameFactoryTest {
 	public void createGame() {
 		GameFactory factory = new GameFactory();
 		Game game = factory.create();
+		int[] expectedManaCosts = {0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8};
+		List<DamageCard> cards =  game.getStarterDeck().getCards();
+		for (int i=0; i<cards.size(); i++) {
+			DamageCard card = cards.get(i);
+			assertEquals(expectedManaCosts[i], card.getManaCost());						
+		}
 		assertPlayer(game.getPlayer1());
 		assertPlayer(game.getPlayer2());
 	}
@@ -21,13 +27,8 @@ public class GameFactoryTest {
 		assertNotNull(player);
 		assertEquals(30, player.getHealth());
 		assertEquals(0, player.getMana());
-		assertEquals(20, player.getDeck().getCards().size());
-		int[] expectedManaCosts = {0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8};
-		List<DamageCard> cards =  player.getDeck().getCards();
-		for (int i=0; i<cards.size(); i++) {
-			DamageCard card = cards.get(i);
-			assertEquals(expectedManaCosts[i], card.getManaCost());						
-		}
+		assertEquals(17, player.getDeck().getCards().size());
+		assertEquals(3, player.getCardsOnHand().size());
 	}
 
 }
