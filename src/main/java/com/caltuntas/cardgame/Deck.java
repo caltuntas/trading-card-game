@@ -6,6 +6,16 @@ import java.util.Random;
 
 public class Deck {
 	private List<DamageCard> cards = new ArrayList<DamageCard>();
+	
+	public static Deck createWithManaCosts(int ...manaCosts) {
+		Deck deck = new Deck();
+		for (int i = 0; i < manaCosts.length; i++) {
+			int manaCost = manaCosts[i];
+			DamageCard card = new DamageCard(manaCost);			
+			deck.add(card);
+		}
+		return deck;
+	}
 
 	public int getDamageCardCount() {
 		return cards.size();
@@ -29,6 +39,14 @@ public class Deck {
 			}
 		}
 		return selectedCards;
+	}
+
+	public List<DamageCard> getCards() {
+		return cards;
+	}
+
+	public void setCards(List<DamageCard> cards) {
+		this.cards = cards;
 	}
 
 }

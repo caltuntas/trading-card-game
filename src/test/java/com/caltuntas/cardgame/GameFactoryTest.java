@@ -2,6 +2,9 @@ package com.caltuntas.cardgame;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Test;
 
 public class GameFactoryTest {
@@ -10,8 +13,21 @@ public class GameFactoryTest {
 	public void createGame() {
 		GameFactory factory = new GameFactory();
 		Game game = factory.create();
-		assertNotNull(game.getPlayer1());
-		assertNotNull(game.getPlayer1());
+		assertPlayer(game.getPlayer1());
+		assertPlayer(game.getPlayer2());
+	}
+
+	private void assertPlayer(Player player) {
+		assertNotNull(player);
+		assertEquals(30, player.getHealth());
+		assertEquals(0, player.getMana());
+		assertEquals(20, player.getDeck().getCards().size());
+		int[] expectedManaCosts = {0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8};
+		List<DamageCard> cards =  player.getDeck().getCards();
+		for (int i=0; i<cards.size(); i++) {
+			DamageCard card = cards.get(i);
+			assertEquals(expectedManaCosts[i], card.getManaCost());						
+		}
 	}
 
 }
