@@ -28,7 +28,7 @@ public class Deck {
 		}
 	}
 
-	public List<DamageCard> receiveRandom(int cardCount) {
+	public List<DamageCard> drawRandom(int cardCount) {
 		List<DamageCard> selectedCards = new ArrayList<DamageCard>();
 		while (selectedCards.size()!=cardCount) {
 			Random random = new Random();
