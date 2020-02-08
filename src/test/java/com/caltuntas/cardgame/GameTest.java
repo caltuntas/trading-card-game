@@ -1,6 +1,7 @@
 package com.caltuntas.cardgame;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
@@ -25,6 +26,21 @@ public class GameTest {
 		game.start();
 		assertEquals(player1, game.getActivePlayer());
 		assertEquals(1, player1.getMana());
+	}
+
+	@Test
+	public void activePlayerChange() {
+		InputDevice inputDevice = mock(InputDevice.class);
+		
+		when(inputDevice.getCommand()).thenReturn("skip");
+		Game game = new Game(inputDevice);
+		Player player1 = new Player(30, 0, createTestDeck());
+		Player player2 = new Player(30, 0, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		
+		game.progress();
+		assertEquals(player2, game.getActivePlayer());
 	}
 
 }
