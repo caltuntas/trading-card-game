@@ -37,6 +37,7 @@ public class Game {
 	}
 	public void setActivePlayer(Player activePlayer) {
 		this.activePlayer = activePlayer;
+		this.activePlayer.activate();
 	}
 	
 	public InputDevice getInputDevice() {
@@ -54,21 +55,26 @@ public class Game {
 	public void start() {
 		setActivePlayer(player1);		
 		setOpponent(player2);
-		player1.activate();
 	}
 	public void progress() {
 		String command = this.inputDevice.getCommand();
 		if(command.equals("skip")) {
-			Player currentActivePlayer = getActivePlayer();
-			Player currentOpponent = getOpponent();
-			setActivePlayer(currentOpponent);		
-			setOpponent(currentActivePlayer);
-			player2.activate();
+			swapPlayers();
 		}else if(command.startsWith("playWithCard")) {
 			String cardIndexString = command.substring("playWithCard".length());			
 			int cardIndex = Integer.parseInt(cardIndexString);
 			DamageCard card = activePlayer.playWith(cardIndex);
 			opponent.damage(card);
 		}
+		
+		if(!activePlayer.canPlay()) {
+			swapPlayers();			
+		}
+	}
+	private void swapPlayers() {
+		Player currentActivePlayer = getActivePlayer();
+		Player currentOpponent = getOpponent();
+		setActivePlayer(currentOpponent);		
+		setOpponent(currentActivePlayer);
 	}
 }

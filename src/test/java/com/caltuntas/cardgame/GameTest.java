@@ -9,8 +9,8 @@ public class GameTest {
 	private Deck createTestDeck() {
 		Deck deck = new Deck();
 		DamageCard card1 = new DamageCard(1);
-		DamageCard card2 = new DamageCard(2);
-		DamageCard card3 = new DamageCard(3);
+		DamageCard card2 = new DamageCard(1);
+		DamageCard card3 = new DamageCard(1);
 		deck.add(card1, card2, card3);
 		return deck;
 	}
@@ -38,6 +38,7 @@ public class GameTest {
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
+		game.start();
 		
 		game.progress();
 		assertEquals(player2, game.getActivePlayer());
@@ -56,8 +57,23 @@ public class GameTest {
 		game.start();
 		
 		game.progress();
-		assertEquals(player1, game.getActivePlayer());
-		assertTrue(game.getOpponent().getHealth()<30);
+		assertTrue(game.getActivePlayer().getHealth()<30);
+	}
+
+	@Test
+	public void opponentBecomesActiveWhenActivePlayerHasNoCards() {
+		InputDevice inputDevice = mock(InputDevice.class);
+		
+		when(inputDevice.getCommand()).thenReturn("playWithCard0");
+		Game game = new Game(inputDevice);
+		Player player1 = new Player(30, 0, createTestDeck());
+		Player player2 = new Player(30, 0, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		game.start();
+		
+		game.progress();
+		assertEquals(player2, game.getActivePlayer());
 	}
 
 }
