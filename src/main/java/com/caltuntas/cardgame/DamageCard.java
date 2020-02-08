@@ -14,4 +14,9 @@ public class DamageCard {
 	public void setManaCost(int manaCost) {
 		this.manaCost = manaCost;
 	}
+
+	@Override
+	public String toString() {
+		return "DamageCard [manaCost=" + manaCost + ", hashCode()=" + hashCode() + "]";
+	}
 }

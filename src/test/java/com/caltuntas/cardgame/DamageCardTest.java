@@ -12,4 +12,11 @@ public class DamageCardTest {
 		assertEquals(4, damageCard.getManaCost());
 	}
 
+	@Test
+	public void customToString() {
+		DamageCard damageCard = new DamageCard(4);
+		String str = damageCard.toString();
+		assertTrue(str.contains("DamageCard [manaCost=4,"));
+	}
+
 }
