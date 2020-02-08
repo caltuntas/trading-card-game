@@ -29,7 +29,7 @@ public class GameTest {
 	}
 
 	@Test
-	public void activePlayerChange() {
+	public void playerSkips() {
 		InputDevice inputDevice = mock(InputDevice.class);
 		
 		when(inputDevice.getCommand()).thenReturn("skip");
