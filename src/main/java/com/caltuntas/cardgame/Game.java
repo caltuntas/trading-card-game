@@ -64,7 +64,7 @@ public class Game {
 			String cardIndexString = command.substring("playWithCard".length());			
 			int cardIndex = Integer.parseInt(cardIndexString);
 			DamageCard card = activePlayer.playWith(cardIndex);
-			opponent.damage(card);
+			opponent.hitBy(card);
 		}
 		
 		if(!activePlayer.canPlay()) {

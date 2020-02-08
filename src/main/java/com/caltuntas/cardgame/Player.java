@@ -63,7 +63,7 @@ public class Player {
         }
 	}
 
-	public void damage(DamageCard card) {
+	public void hitBy(DamageCard card) {
 		int healthAfterDamage = getHealth() - card.getManaCost();
 		setHealth(healthAfterDamage);		
 	}

@@ -46,7 +46,7 @@ public class PlayerTest {
 	public void hitByDamageCard() {
 		Player player = new Player(30,0, createTestDeck());
 		DamageCard card = new DamageCard(2);
-		player.damage(card);
+		player.hitBy(card);
 		assertEquals(28, player.getHealth());
 		
 	}
