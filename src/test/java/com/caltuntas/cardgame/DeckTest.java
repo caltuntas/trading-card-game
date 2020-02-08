@@ -48,6 +48,16 @@ public class DeckTest {
 		assertEquals(2,cards.size()) ;
 		assertEquals(1,deck.getDamageCardCount()) ;
 	}
+
+	@Test
+	public void customToString() {
+		Deck deck = new Deck();
+		DamageCard card1 = new DamageCard(1);
+		deck.add(card1);
+		String str = deck.toString();
+		assertTrue(str.contains("Deck [hashCode()="));
+		assertTrue(str.contains(card1.toString()));
+	}
 	
 	//TODO: test drawing more cards than a deck has
 

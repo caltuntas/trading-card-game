@@ -60,4 +60,16 @@ public class Deck {
 		this.cards = cards;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		String deckString = "Deck [hashCode()=" + hashCode() + "]";
+		stringBuilder.append(deckString);
+		stringBuilder.append(System.getProperty("line.separator"));
+		for (DamageCard damageCard : cards) {
+			stringBuilder.append(damageCard.toString());
+			stringBuilder.append(System.getProperty("line.separator"));
+		}
+		return stringBuilder.toString();
+	}
 }
