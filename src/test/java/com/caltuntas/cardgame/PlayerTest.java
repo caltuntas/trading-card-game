@@ -38,5 +38,14 @@ public class PlayerTest {
 		assertEquals(1, player.getCardsOnHand().size());
 		assertEquals(2, player.getDeck().getDamageCardCount());
 	}
+	
+	@Test
+	public void hitByDamageCard() {
+		Player player = new Player(30,0, createTestDeck());
+		DamageCard card = new DamageCard(2);
+		player.damage(card);
+		assertEquals(28, player.getHealth());
+		
+	}
 
 }
