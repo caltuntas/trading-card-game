@@ -60,4 +60,14 @@ public class Player {
 		int healthAfterDamage = getHealth() - card.getManaCost();
 		setHealth(healthAfterDamage);		
 	}
+
+	public DamageCard playWith(int cardIndex) {
+		DamageCard cardToPlay = cardsOnHand.get(cardIndex);		
+		int currentMana = getMana() - cardToPlay.getManaCost();
+		setMana(currentMana);
+		this.getCardsOnHand().remove(cardToPlay);
+		return cardToPlay;
+	}
+	
+	//TODO: check if played card's mana cost is greater than player's current mana
 }
