@@ -31,9 +31,12 @@ public class PlayerTest {
 	@Test
 	public void activatePlayer() {
 		Player player = new Player(30,0, createTestDeck());
+		assertEquals(0, player.getCardsOnHand().size());
 		assertEquals(0, player.getMana());
 		player.activate();
 		assertEquals(1, player.getMana());
+		assertEquals(1, player.getCardsOnHand().size());
+		assertEquals(2, player.getDeck().getDamageCardCount());
 	}
 
 }

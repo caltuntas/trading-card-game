@@ -33,6 +33,7 @@ public class Player {
 
 	public void activate() {
 		this.mana += 1;		
+		drawCards(1);
 	}
 
 	public Deck getDeck() {
