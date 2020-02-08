@@ -6,12 +6,12 @@ public class Game {
 	private Deck starterDeck;
 	private Player activePlayer;
 	private Player opponent;
-	private InputDevice inputDevice;
+	private GameInterface inputDevice;
 	
 	public Game() {
 		super();
 	}
-	public Game(InputDevice inputDevice) {
+	public Game(GameInterface inputDevice) {
 		this.inputDevice =inputDevice;
 	}
 	public Player getPlayer1() {
@@ -40,10 +40,10 @@ public class Game {
 		this.activePlayer.activate();
 	}
 	
-	public InputDevice getInputDevice() {
+	public GameInterface getInputDevice() {
 		return inputDevice;
 	}
-	public void setInputDevice(InputDevice inputDevice) {
+	public void setInputDevice(GameInterface inputDevice) {
 		this.inputDevice = inputDevice;
 	}
 	public Player getOpponent() {
@@ -76,5 +76,10 @@ public class Game {
 		Player currentOpponent = getOpponent();
 		setActivePlayer(currentOpponent);		
 		setOpponent(currentActivePlayer);
+	}
+	public boolean isOver() {
+		if(getActivePlayer().getHealth()<=0 || getOpponent().getHealth()<=0)
+			return true;
+		return false;
 	}
 }

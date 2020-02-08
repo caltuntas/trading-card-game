@@ -1,5 +1,5 @@
 package com.caltuntas.cardgame;
 
-public interface InputDevice {
+public interface GameInterface {
 	String getCommand();
 }

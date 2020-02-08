@@ -30,7 +30,7 @@ public class GameTest {
 
 	@Test
 	public void playerSkips() {
-		InputDevice inputDevice = mock(InputDevice.class);
+		GameInterface inputDevice = mock(GameInterface.class);
 		
 		when(inputDevice.getCommand()).thenReturn("skip");
 		Game game = new Game(inputDevice);
@@ -46,7 +46,7 @@ public class GameTest {
 
 	@Test
 	public void playerUsesDamageCard() {
-		InputDevice inputDevice = mock(InputDevice.class);
+		GameInterface inputDevice = mock(GameInterface.class);
 		
 		when(inputDevice.getCommand()).thenReturn("playWithCard0");
 		Game game = new Game(inputDevice);
@@ -62,7 +62,7 @@ public class GameTest {
 
 	@Test
 	public void opponentBecomesActiveWhenActivePlayerHasNoCards() {
-		InputDevice inputDevice = mock(InputDevice.class);
+		GameInterface inputDevice = mock(GameInterface.class);
 		
 		when(inputDevice.getCommand()).thenReturn("playWithCard0");
 		Game game = new Game(inputDevice);
@@ -78,7 +78,7 @@ public class GameTest {
 
 	@Test
 	public void playerUsesMultipleDamageCards() {
-		InputDevice inputDevice = mock(InputDevice.class);
+		GameInterface inputDevice = mock(GameInterface.class);
 		
 		when(inputDevice.getCommand()).thenReturn("playWithCard0");
 		when(inputDevice.getCommand()).thenReturn("playWithCard0");
@@ -94,6 +94,20 @@ public class GameTest {
 		game.progress();
 		assertEquals(28,game.getOpponent().getHealth());
 		assertEquals(player1, game.getActivePlayer());
+	}
+
+	@Test
+	public void isOver() {
+		GameInterface inputDevice = mock(GameInterface.class);
+		
+		Game game = new Game(inputDevice);
+		Player player1 = new Player(-1, 0, createTestDeck());
+		Player player2 = new Player(30, 0, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		game.start();
+		
+		assertTrue(game.isOver());
 	}
 
 }
