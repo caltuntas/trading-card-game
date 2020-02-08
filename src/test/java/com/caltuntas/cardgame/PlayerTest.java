@@ -88,5 +88,14 @@ public class PlayerTest {
 		player.setCardsOnHand(cardsOnHand);
 		assertFalse(player.canPlay());
 	}
+	@Test
+	public void bleedingOut() {
+		Deck emptyDeck = new Deck();
+		Player player = new Player(30,10, emptyDeck);
+		List<DamageCard> cardsOnHand = new ArrayList<DamageCard>();
+		player.setCardsOnHand(cardsOnHand);
+		player.activate();
+		assertEquals(29, player.getHealth());
+	}
 
 }
