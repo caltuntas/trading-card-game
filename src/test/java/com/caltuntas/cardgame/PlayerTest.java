@@ -106,5 +106,16 @@ public class PlayerTest {
 		player.drawCards(1);
 		assertEquals(10, player.getMana());
 	}
+	
+	
+	@Test
+	public void customToString() {
+		Player player = new Player(30,10, createTestDeck());
+		List<DamageCard> cardsOnHand = Deck.createWithManaCosts(1,1,1,1,1,1).getCards();
+		player.setCardsOnHand(cardsOnHand);
+		String str = player.toString();
+		assertTrue(str.contains("Player [health=30, mana=10"));
+		assertTrue(str.contains(player.getDeck().toString()));
+	}
 
 }

@@ -83,6 +83,27 @@ public class Player {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		String playerString = "Player [health=" + health + ", mana=" + mana + ", hashCode()=" + hashCode() + "]";
+		stringBuilder.append(playerString);
+		String newLine = System.getProperty("line.separator");
+		stringBuilder.append(newLine);
+		for (DamageCard damageCard : cardsOnHand) {
+			stringBuilder.append(damageCard.toString());			
+			stringBuilder.append(newLine);
+		}
+		
+		stringBuilder.append(newLine);
+		stringBuilder.append(getDeck().toString());
+
+		return stringBuilder.toString();
+	}
+
+	
+	
 	
 	//TODO: check if played card's mana cost is greater than player's current mana
 }
