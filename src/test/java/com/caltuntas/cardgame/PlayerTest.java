@@ -98,4 +98,13 @@ public class PlayerTest {
 		assertEquals(29, player.getHealth());
 	}
 
+	@Test
+	public void overload() {
+		Player player = new Player(30,10, createTestDeck());
+		List<DamageCard> cardsOnHand = Deck.createWithManaCosts(1,1,1,1,1,1).getCards();
+		player.setCardsOnHand(cardsOnHand);
+		player.drawCards(1);
+		assertEquals(10, player.getMana());
+	}
+
 }

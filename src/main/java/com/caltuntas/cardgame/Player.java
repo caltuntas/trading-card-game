@@ -57,7 +57,10 @@ public class Player {
 	}
 
 	public void drawCards(int cardCount) {
-		getCardsOnHand().addAll(this.deck.drawRandom(cardCount));		
+        List<DamageCard> cards = this.deck.drawRandom(cardCount);
+        if(cards.size()+getCardsOnHand().size()<=5) {
+			getCardsOnHand().addAll(cards);		
+        }
 	}
 
 	public void damage(DamageCard card) {
