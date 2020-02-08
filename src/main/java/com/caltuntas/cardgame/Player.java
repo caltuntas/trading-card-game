@@ -68,6 +68,14 @@ public class Player {
 		this.getCardsOnHand().remove(cardToPlay);
 		return cardToPlay;
 	}
+
+	public boolean canPlay() {
+		for (DamageCard damageCard : cardsOnHand) {
+			if(getMana()>=damageCard.getManaCost())
+				return true;
+		}
+		return false;
+	}
 	
 	//TODO: check if played card's mana cost is greater than player's current mana
 }

@@ -2,6 +2,7 @@ package com.caltuntas.cardgame;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -58,7 +59,22 @@ public class PlayerTest {
 		player.playWith(2);
 		assertEquals(2, player.getCardsOnHand().size());
 		assertEquals(7, player.getMana());
-		
+	}
+
+	@Test
+	public void playerCantPlayWhenDoesNotHaveEnoughMana() {
+		Player player = new Player(30,0, createTestDeck());
+		List<DamageCard> cardsOnHand = createTestDeck().getCards();
+		player.setCardsOnHand(cardsOnHand);
+		assertFalse(player.canPlay());
+	}
+
+	@Test
+	public void playerCantPlayWhenDoesNotHaveEnoughCardsOnHand() {
+		Player player = new Player(30,10, createTestDeck());
+		List<DamageCard> cardsOnHand = new ArrayList<DamageCard>();
+		player.setCardsOnHand(cardsOnHand);
+		assertFalse(player.canPlay());
 	}
 
 }
