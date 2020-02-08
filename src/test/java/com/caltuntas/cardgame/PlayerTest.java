@@ -62,6 +62,18 @@ public class PlayerTest {
 	}
 
 	@Test
+	public void playWithMultipleCards() {
+		Player player = new Player(30,10, createTestDeck());
+		List<DamageCard> cardsOnHand = createTestDeck().getCards();
+		player.setCardsOnHand(cardsOnHand);
+		player.playWith(0);
+		player.playWith(0);
+		player.playWith(0);
+		assertEquals(0, player.getCardsOnHand().size());
+		assertEquals(4, player.getMana());
+	}
+
+	@Test
 	public void playerCantPlayWhenDoesNotHaveEnoughMana() {
 		Player player = new Player(30,0, createTestDeck());
 		List<DamageCard> cardsOnHand = createTestDeck().getCards();
