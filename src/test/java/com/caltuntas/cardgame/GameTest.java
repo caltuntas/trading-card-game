@@ -43,4 +43,21 @@ public class GameTest {
 		assertEquals(player2, game.getActivePlayer());
 	}
 
+	@Test
+	public void playerUsesDamageCard() {
+		InputDevice inputDevice = mock(InputDevice.class);
+		
+		when(inputDevice.getCommand()).thenReturn("playWithCard0");
+		Game game = new Game(inputDevice);
+		Player player1 = new Player(30, 0, createTestDeck());
+		Player player2 = new Player(30, 0, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		game.start();
+		
+		game.progress();
+		assertEquals(player1, game.getActivePlayer());
+		assertTrue(game.getOpponent().getHealth()<30);
+	}
+
 }

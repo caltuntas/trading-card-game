@@ -5,6 +5,7 @@ public class Game {
 	private Player player2;
 	private Deck starterDeck;
 	private Player activePlayer;
+	private Player opponent;
 	private InputDevice inputDevice;
 	
 	public Game() {
@@ -44,15 +45,30 @@ public class Game {
 	public void setInputDevice(InputDevice inputDevice) {
 		this.inputDevice = inputDevice;
 	}
+	public Player getOpponent() {
+		return opponent;
+	}
+	public void setOpponent(Player opponent) {
+		this.opponent = opponent;
+	}
 	public void start() {
 		setActivePlayer(player1);		
+		setOpponent(player2);
 		player1.activate();
 	}
 	public void progress() {
 		String command = this.inputDevice.getCommand();
 		if(command.equals("skip")) {
-			setActivePlayer(player2);		
+			Player currentActivePlayer = getActivePlayer();
+			Player currentOpponent = getOpponent();
+			setActivePlayer(currentOpponent);		
+			setOpponent(currentActivePlayer);
 			player2.activate();
+		}else if(command.startsWith("playWithCard")) {
+			String cardIndexString = command.substring("playWithCard".length());			
+			int cardIndex = Integer.parseInt(cardIndexString);
+			DamageCard card = activePlayer.playWith(cardIndex);
+			opponent.damage(card);
 		}
 	}
 }
