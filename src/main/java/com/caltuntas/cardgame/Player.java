@@ -53,7 +53,7 @@ public class Player {
 	}
 
 	public void drawCards(int cardCount) {
-		setCardsOnHand(this.deck.drawRandom(cardCount));		
+		getCardsOnHand().addAll(this.deck.drawRandom(cardCount));		
 	}
 
 	public void damage(DamageCard card) {

@@ -76,4 +76,24 @@ public class GameTest {
 		assertEquals(player2, game.getActivePlayer());
 	}
 
+	@Test
+	public void playerUsesMultipleDamageCards() {
+		InputDevice inputDevice = mock(InputDevice.class);
+		
+		when(inputDevice.getCommand()).thenReturn("playWithCard0");
+		when(inputDevice.getCommand()).thenReturn("playWithCard0");
+		Game game = new Game(inputDevice);
+		Player player1 = new Player(30, 10, createTestDeck());
+		player1.setCardsOnHand(createTestDeck().getCards());
+		Player player2 = new Player(30, 0, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		game.start();
+		
+		game.progress();
+		game.progress();
+		assertEquals(28,game.getOpponent().getHealth());
+		assertEquals(player1, game.getActivePlayer());
+	}
+
 }
