@@ -38,6 +38,7 @@ public class Deck {
 				selectedCards.add(selectedCard);			
 			}
 		}
+		cards.removeAll(selectedCards);
 		return selectedCards;
 	}
 
