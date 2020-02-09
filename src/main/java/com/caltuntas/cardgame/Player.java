@@ -13,7 +13,7 @@ public class Player {
 	public Player(int health, int mana, Deck deck) {
 		this.health = health;
 		this.mana = mana;
-		this.deck = deck;
+		setDeck(deck);
 	}
 
 	public int getHealth() {

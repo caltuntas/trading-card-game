@@ -13,7 +13,7 @@ public class Game {
 	}
 
 	public Game(GameView inputDevice) {
-		this.inputDevice = inputDevice;
+		setInputDevice(inputDevice);
 	}
 
 	public Player getPlayer1() {
@@ -72,11 +72,11 @@ public class Game {
 
 	public void nextRound() {
 		while (activePlayer.canPlay()) {
-			inputDevice.show("-----Active player-----");
-			inputDevice.show(getActivePlayer().toString());
-			inputDevice.show("-----Opponent player-----");
-			inputDevice.show(getOpponent().toString());
-			String command = this.inputDevice.getCommand();
+			getInputDevice().show("-----Active player-----");
+			getInputDevice().show(getActivePlayer().toString());
+			getInputDevice().show("-----Opponent player-----");
+			getInputDevice().show(getOpponent().toString());
+			String command = getInputDevice().getCommand();
 			if (command.equals("skip")) {
 				break;
 			} else if (command.startsWith("playWithCard")) {
@@ -92,7 +92,7 @@ public class Game {
 	}
 
 	private void swapPlayers() {
-		inputDevice.show("Swapping players");
+		getInputDevice().show("Swapping players");
 		Player currentActivePlayer = getActivePlayer();
 		Player currentOpponent = getOpponent();
 		setActivePlayer(currentOpponent);
