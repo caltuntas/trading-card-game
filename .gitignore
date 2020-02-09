@@ -193,6 +193,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+nbactions.xml
 
 # End of https://www.gitignore.io/api/java,eclipse,intellij,netbeans
 /target/
