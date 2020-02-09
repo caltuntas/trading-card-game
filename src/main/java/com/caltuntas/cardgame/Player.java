@@ -79,6 +79,9 @@ public class Player {
 
 	public DamageCard playWith(int cardIndex) {
 		DamageCard cardToPlay = cardsOnHand.get(cardIndex);
+		if(cardToPlay.getManaCost()>getMana()) {
+			throw new InvalidCard("Player doesn't have sufficient mana for the card.");
+		}
 		int currentMana = getMana() - cardToPlay.getManaCost();
 		setMana(currentMana);
 		this.getCardsOnHand().remove(cardToPlay);

@@ -118,4 +118,14 @@ public class PlayerTest {
 		assertTrue(str.contains(player.getDeck().toString()));
 	}
 
+	@Test(expected = InvalidCard.class)
+	public void playWithACardRequiresMoreManaThanPlayerHas() {
+		Player player = new Player(30,1, createTestDeck());
+		List<DamageCard> cardsOnHand = createTestDeck().getCards();
+		player.setCardsOnHand(cardsOnHand);
+		player.playWith(2);
+		assertEquals(3, player.getCardsOnHand().size());
+		assertEquals(1, player.getMana());
+	}
+
 }
