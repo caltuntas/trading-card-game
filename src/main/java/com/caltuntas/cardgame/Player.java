@@ -122,6 +122,4 @@ public class Player {
 
 		return stringBuilder.toString();
 	}
-
-	// TODO: check if played card's mana cost is greater than player's current mana
 }

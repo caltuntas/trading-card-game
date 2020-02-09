@@ -76,7 +76,4 @@ public class DeckTest {
 		assertTrue(str.contains("Deck [hashCode()="));
 		assertTrue(str.contains(card1.toString()));
 	}
-	
-	//TODO: test drawing more cards than a deck has
-
 }
