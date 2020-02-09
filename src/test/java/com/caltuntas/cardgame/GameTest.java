@@ -40,7 +40,7 @@ public class GameTest {
 		game.setPlayer2(player2);
 		game.start();
 		
-		game.progress();
+		game.nextRound();
 		assertEquals(player2, game.getActivePlayer());
 	}
 
@@ -56,7 +56,7 @@ public class GameTest {
 		game.setPlayer2(player2);
 		game.start();
 		
-		game.progress();
+		game.nextRound();
 		assertTrue(game.getActivePlayer().getHealth()<30);
 	}
 
@@ -72,7 +72,7 @@ public class GameTest {
 		game.setPlayer2(player2);
 		game.start();
 		
-		game.progress();
+		game.nextRound();
 		assertEquals(player2, game.getActivePlayer());
 	}
 
@@ -89,7 +89,7 @@ public class GameTest {
 		game.setPlayer2(player2);
 		game.start();
 		
-		game.progress();
+		game.nextRound();
 		assertEquals(28,player2.getHealth());
 		assertEquals(player2, game.getActivePlayer());
 	}

@@ -70,7 +70,7 @@ public class Game {
 		setOpponent(player2);
 	}
 
-	public void progress() {
+	public void nextRound() {
 		while (activePlayer.canPlay()) {
 			inputDevice.show("-----Active player-----");
 			inputDevice.show(getActivePlayer().toString());

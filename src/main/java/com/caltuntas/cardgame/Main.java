@@ -9,7 +9,7 @@ public class Main {
 		game.setInputDevice(new TerminalView());
 		game.start();
 		while(!game.isOver()) {
-			game.progress();
+			game.nextRound();
 		}
 
 	}
