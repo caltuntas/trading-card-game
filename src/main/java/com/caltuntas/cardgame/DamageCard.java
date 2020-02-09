@@ -4,7 +4,7 @@ public class DamageCard {
 	private int manaCost;
 
 	public DamageCard(int manaCost) {
-		this.manaCost = manaCost;
+		setManaCost(manaCost);
 	}
 
 	public int getManaCost() {

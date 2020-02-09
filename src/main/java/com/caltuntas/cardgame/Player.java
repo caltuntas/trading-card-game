@@ -34,7 +34,7 @@ public class Player {
 
 	public void activate() {
 		this.mana += 1;
-		if (getCardsOnHand().size() <= 0 && deck.getDamageCardCount() <= 0) {
+		if (deck.getDamageCardCount() <= 0) {
 			this.health--;
 			return;
 		}

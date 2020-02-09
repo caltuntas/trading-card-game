@@ -1,6 +1,11 @@
 package com.caltuntas.cardgame;
 
+import static com.caltuntas.cardgame.Commands.*;
+
 public class Game {
+	private static final String SWAPPING_PLAYERS_HEADERS = "Swapping players";
+	private static final String OPPONENT_PLAYER_HEADER = "-----Opponent player-----";
+	private static final String ACTIVE_PLAYER_HEADER = "-----Active player-----";
 	private Player player1;
 	private Player player2;
 	private Deck starterDeck;
@@ -72,15 +77,15 @@ public class Game {
 
 	public void nextRound() {
 		while (activePlayer.canPlay()) {
-			getInputDevice().show("-----Active player-----");
-			getInputDevice().show(getActivePlayer().toString());
-			getInputDevice().show("-----Opponent player-----");
-			getInputDevice().show(getOpponent().toString());
+			display(ACTIVE_PLAYER_HEADER);
+			display(getActivePlayer().toString());
+			display(OPPONENT_PLAYER_HEADER);
+			display(getOpponent().toString());
 			String command = getInputDevice().getCommand();
-			if (command.equals("skip")) {
+			if (command.equals(Commands.SKIP_COMMAND)) {
 				break;
-			} else if (command.startsWith("playWithCard")) {
-				String cardIndexString = command.substring("playWithCard".length());
+			} else if (command.startsWith(PLAY_COMMAND)) {
+				String cardIndexString = command.substring(PLAY_COMMAND.length());
 				int cardIndex = Integer.parseInt(cardIndexString);
 				if(activePlayer.canPlayWith(cardIndex)) {
 					DamageCard card = activePlayer.playWith(cardIndex);
@@ -92,7 +97,7 @@ public class Game {
 	}
 
 	private void swapPlayers() {
-		getInputDevice().show("Swapping players");
+		display(SWAPPING_PLAYERS_HEADERS);
 		Player currentActivePlayer = getActivePlayer();
 		Player currentOpponent = getOpponent();
 		setActivePlayer(currentOpponent);
@@ -110,5 +115,9 @@ public class Game {
 			return player1;
 		else
 			return player2;
+	}
+	
+	private void display(String text) {
+		getInputDevice().show(text);
 	}
 }
