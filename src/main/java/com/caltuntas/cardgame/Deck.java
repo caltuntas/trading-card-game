@@ -40,6 +40,9 @@ public class Deck {
 
 	public List<DamageCard> drawRandom(int cardCount) {
 		List<DamageCard> selectedCards = new ArrayList<DamageCard>();
+		if(this.getDamageCardCount()<=0) {
+			return selectedCards;
+		}
 		while (selectedCards.size()!=cardCount) {
 			Random random = new Random();
 			int selectedCardIndex = random.nextInt(this.cards.size());
