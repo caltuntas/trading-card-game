@@ -47,10 +47,8 @@ public class Deck {
 			Random random = new Random();
 			int selectedCardIndex = random.nextInt(this.cards.size());
 			DamageCard selectedCard = this.cards.get(selectedCardIndex);
-			if(!selectedCards.contains(selectedCard)) {
-				selectedCards.add(selectedCard);			
-				cards.remove(selectedCard);
-			}
+			selectedCards.add(selectedCard);			
+			this.cards.remove(selectedCard);
 		}
 		return selectedCards;
 	}
