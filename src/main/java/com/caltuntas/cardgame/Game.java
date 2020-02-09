@@ -7,79 +7,95 @@ public class Game {
 	private Player activePlayer;
 	private Player opponent;
 	private GameView inputDevice;
-	
+
 	public Game() {
 		super();
 	}
+
 	public Game(GameView inputDevice) {
-		this.inputDevice =inputDevice;
+		this.inputDevice = inputDevice;
 	}
+
 	public Player getPlayer1() {
 		return player1;
 	}
+
 	public void setPlayer1(Player player1) {
 		this.player1 = player1;
 	}
+
 	public Player getPlayer2() {
 		return player2;
 	}
+
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
 	}
+
 	public Deck getStarterDeck() {
 		return starterDeck;
 	}
+
 	public void setStarterDeck(Deck starterDeck) {
 		this.starterDeck = starterDeck;
 	}
+
 	public Player getActivePlayer() {
 		return this.activePlayer;
 	}
+
 	public void setActivePlayer(Player activePlayer) {
 		this.activePlayer = activePlayer;
 		this.activePlayer.activate();
 	}
-	
+
 	public GameView getInputDevice() {
 		return inputDevice;
 	}
+
 	public void setInputDevice(GameView inputDevice) {
 		this.inputDevice = inputDevice;
 	}
+
 	public Player getOpponent() {
 		return opponent;
 	}
+
 	public void setOpponent(Player opponent) {
 		this.opponent = opponent;
 	}
+
 	public void start() {
-		setActivePlayer(player1);		
+		setActivePlayer(player1);
 		setOpponent(player2);
 	}
+
 	public void progress() {
-		inputDevice.show("Active player : " + getActivePlayer());
-		String command = this.inputDevice.getCommand();
-		if(command.equals("skip")) {
-			swapPlayers();
-		}else if(command.startsWith("playWithCard")) {
-			String cardIndexString = command.substring("playWithCard".length());			
-			int cardIndex = Integer.parseInt(cardIndexString);
-			DamageCard card = activePlayer.playWith(cardIndex);
-			opponent.hitBy(card);
-		}
-		
-		if(!activePlayer.canPlay()) {
-			swapPlayers();			
-		}
+		while (activePlayer.canPlay()) {
+			inputDevice.show("-----Active player-----");
+			inputDevice.show(getActivePlayer().toString());
+			String command = this.inputDevice.getCommand();
+			if (command.equals("skip")) {
+				break;
+			} else if (command.startsWith("playWithCard")) {
+				String cardIndexString = command.substring("playWithCard".length());
+				int cardIndex = Integer.parseInt(cardIndexString);
+				DamageCard card = activePlayer.playWith(cardIndex);
+				opponent.hitBy(card);
+			}
+		} 
+		swapPlayers();
 	}
+
 	private void swapPlayers() {
 		Player currentActivePlayer = getActivePlayer();
 		Player currentOpponent = getOpponent();
-		setActivePlayer(currentOpponent);		
+		setActivePlayer(currentOpponent);
 		setOpponent(currentActivePlayer);
 	}
+
 	public boolean isOver() {
-		if(getActivePlayer().getHealth()<=0 || getOpponent().getHealth()<=0)
+		if (getActivePlayer().getHealth() <= 0 || getOpponent().getHealth() <= 0)
 			return true;
 		return false;
 	}

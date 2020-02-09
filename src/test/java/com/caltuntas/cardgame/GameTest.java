@@ -80,8 +80,7 @@ public class GameTest {
 	public void playerUsesMultipleDamageCards() {
 		GameView inputDevice = mock(GameView.class);
 		
-		when(inputDevice.getCommand()).thenReturn("playWithCard0");
-		when(inputDevice.getCommand()).thenReturn("playWithCard0");
+		when(inputDevice.getCommand()).thenReturn("playWithCard0","playWithCard0","skip");
 		Game game = new Game(inputDevice);
 		Player player1 = new Player(30, 10, createTestDeck());
 		player1.setCardsOnHand(createTestDeck().getCards());
@@ -91,9 +90,8 @@ public class GameTest {
 		game.start();
 		
 		game.progress();
-		game.progress();
-		assertEquals(28,game.getOpponent().getHealth());
-		assertEquals(player1, game.getActivePlayer());
+		assertEquals(28,player2.getHealth());
+		assertEquals(player2, game.getActivePlayer());
 	}
 
 	@Test
