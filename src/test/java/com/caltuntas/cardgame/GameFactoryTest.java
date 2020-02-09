@@ -19,15 +19,15 @@ public class GameFactoryTest {
 			DamageCard card = cards.get(i);
 			assertEquals(expectedManaCosts[i], card.getManaCost());						
 		}
-		assertPlayer(game.getPlayer1());
-		assertPlayer(game.getPlayer2());
+		assertPlayer(game.getPlayer1(), game);
+		assertPlayer(game.getPlayer2(), game);
 	}
 
-	private void assertPlayer(Player player) {
+	private void assertPlayer(Player player, Game game) {
 		assertNotNull(player);
 		assertEquals(30, player.getHealth());
 		assertEquals(0, player.getMana());
-		assertEquals(17, player.getDeck().getCards().size());
+		assertEquals(game.getStarterDeck().getDamageCardCount()-3, player.getDeck().getCards().size());
 		assertEquals(3, player.getCardsOnHand().size());
 	}
 
