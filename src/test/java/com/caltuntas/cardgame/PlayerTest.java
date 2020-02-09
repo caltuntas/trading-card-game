@@ -43,6 +43,19 @@ public class PlayerTest {
 	}
 	
 	@Test
+	public void activatePlayerReceivesMax10Mana() {
+		Player player = new Player(30,0, createTestDeck());
+		assertEquals(0, player.getCardsOnHand().size());
+		assertEquals(0, player.getMana());
+		for (int i = 0; i < 20; i++) {
+			player.activate();
+		}
+		
+		assertEquals(10, player.getMana());
+		
+	}
+	
+	@Test
 	public void hitByDamageCard() {
 		Player player = new Player(30,0, createTestDeck());
 		DamageCard card = new DamageCard(2);

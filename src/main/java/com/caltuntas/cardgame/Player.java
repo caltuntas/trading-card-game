@@ -33,7 +33,10 @@ public class Player {
 	}
 
 	public void activate() {
-		this.mana += 1;
+		if(this.mana<10) {
+			this.mana += 1;
+		}
+		
 		if (deck.getDamageCardCount() <= 0) {
 			this.health--;
 			return;

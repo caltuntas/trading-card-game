@@ -2,6 +2,7 @@ package com.caltuntas.cardgame;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static com.caltuntas.cardgame.Commands.*;
 
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class GameTest {
 	public void playerSkips() {
 		GameView inputDevice = mock(GameView.class);
 		
-		when(inputDevice.getCommand()).thenReturn("skip");
+		when(inputDevice.getCommand()).thenReturn(SKIP_COMMAND);
 		Game game = new Game(inputDevice);
 		Player player1 = new Player(30, 0, createTestDeck());
 		Player player2 = new Player(30, 0, createTestDeck());
@@ -48,7 +49,7 @@ public class GameTest {
 	public void playerUsesDamageCard() {
 		GameView inputDevice = mock(GameView.class);
 		
-		when(inputDevice.getCommand()).thenReturn("playWithCard0");
+		when(inputDevice.getCommand()).thenReturn(PLAY_COMMAND+"0");
 		Game game = new Game(inputDevice);
 		Player player1 = new Player(30, 0, createTestDeck());
 		Player player2 = new Player(30, 0, createTestDeck());
@@ -64,7 +65,7 @@ public class GameTest {
 	public void opponentBecomesActiveWhenActivePlayerHasNoCards() {
 		GameView inputDevice = mock(GameView.class);
 		
-		when(inputDevice.getCommand()).thenReturn("playWithCard0");
+		when(inputDevice.getCommand()).thenReturn(PLAY_COMMAND+"0");
 		Game game = new Game(inputDevice);
 		Player player1 = new Player(30, 0, createTestDeck());
 		Player player2 = new Player(30, 0, createTestDeck());
@@ -80,7 +81,7 @@ public class GameTest {
 	public void playerUsesMultipleDamageCards() {
 		GameView inputDevice = mock(GameView.class);
 		
-		when(inputDevice.getCommand()).thenReturn("playWithCard0","playWithCard0","skip");
+		when(inputDevice.getCommand()).thenReturn(PLAY_COMMAND+"0",PLAY_COMMAND+"0",SKIP_COMMAND);
 		Game game = new Game(inputDevice);
 		Player player1 = new Player(30, 10, createTestDeck());
 		player1.setCardsOnHand(createTestDeck().getCards());
@@ -91,6 +92,30 @@ public class GameTest {
 		
 		game.nextRound();
 		assertEquals(28,player2.getHealth());
+		assertEquals(player2, game.getActivePlayer());
+	}
+	
+	@Test
+	public void playerChoosesCardRequiresMoreMana() {
+		Deck deck = new Deck();
+		DamageCard card1 = new DamageCard(1);
+		DamageCard card2 = new DamageCard(5);
+		DamageCard card3 = new DamageCard(4);
+		deck.add(card1, card2, card3);
+		
+		GameView inputDevice = mock(GameView.class);
+		
+		when(inputDevice.getCommand()).thenReturn(PLAY_COMMAND+"1",SKIP_COMMAND);
+		Game game = new Game(inputDevice);
+		Player player1 = new Player(30, 1, deck);
+		player1.setCardsOnHand(deck.getCards());
+		Player player2 = new Player(30, 10, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		game.start();
+		
+		game.nextRound();
+		assertEquals(30,player2.getHealth());
 		assertEquals(player2, game.getActivePlayer());
 	}
 
@@ -105,6 +130,9 @@ public class GameTest {
 		game.setPlayer2(player2);
 		game.start();
 		
+		assertTrue(game.isOver());
+		player1.setHealth(30);
+		player2.setHealth(-1);
 		assertTrue(game.isOver());
 	}
 
