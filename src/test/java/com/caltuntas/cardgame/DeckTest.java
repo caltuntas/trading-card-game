@@ -52,11 +52,18 @@ public class DeckTest {
 	@Test
 	public void drawRandomFromEmptyDeck() {
 		Deck deck = new Deck();
+		List<DamageCard> cards = deck.drawRandom(1);
+		assertEquals(0,cards.size()) ;
+		assertEquals(0,deck.getDamageCardCount()) ;
+	}
+
+	@Test
+	public void drawMoreCardsThanDeckHas() {
+		Deck deck = new Deck();
 		DamageCard card1 = new DamageCard(1);
 		deck.add(card1);
-		List<DamageCard> cards = deck.drawRandom(1);
-		List<DamageCard> cards1 = deck.drawRandom(1);
-		assertEquals(0,cards1.size()) ;
+		List<DamageCard> cards = deck.drawRandom(3);
+		assertEquals(1,cards.size()) ;
 		assertEquals(0,deck.getDamageCardCount()) ;
 	}
 

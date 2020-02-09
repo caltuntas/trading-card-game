@@ -43,15 +43,15 @@ public class Deck {
 		if(this.getDamageCardCount()<=0) {
 			return selectedCards;
 		}
-		while (selectedCards.size()!=cardCount) {
+		while (getDamageCardCount()>0 && selectedCards.size()!=cardCount) {
 			Random random = new Random();
 			int selectedCardIndex = random.nextInt(this.cards.size());
 			DamageCard selectedCard = this.cards.get(selectedCardIndex);
 			if(!selectedCards.contains(selectedCard)) {
 				selectedCards.add(selectedCard);			
+				cards.remove(selectedCard);
 			}
 		}
-		cards.removeAll(selectedCards);
 		return selectedCards;
 	}
 
