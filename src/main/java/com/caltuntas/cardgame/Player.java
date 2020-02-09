@@ -110,7 +110,7 @@ public class Player {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		String playerString = "Player [name=" + name + ", health=" + health + ", mana=" + mana + ", cardsOnHand.size="
+		String playerString = "Player [name=" + getName() + ", health=" + getHealth() + ", mana=" + getMana() + ", cardsOnHand.size="
 				+ cardsOnHand.size() +", deck.size="+ deck.getDamageCardCount() + ", hashCode()=" + hashCode() + "]";
 		stringBuilder.append(playerString);
 		String newLine = System.getProperty("line.separator");

@@ -59,19 +59,17 @@ public class Deck {
 		return cards;
 	}
 
-	public void setCards(List<DamageCard> cards) {
-		this.cards = cards;
-	}
 
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		String deckString = "Deck [hashCode()=" + hashCode() + "]";
 		stringBuilder.append(deckString);
-		stringBuilder.append(System.getProperty("line.separator"));
+		String newLine = System.getProperty("line.separator");
+		stringBuilder.append(newLine);
 		for (DamageCard damageCard : cards) {
 			stringBuilder.append(damageCard.toString());
-			stringBuilder.append(System.getProperty("line.separator"));
+			stringBuilder.append(newLine);
 		}
 		return stringBuilder.toString();
 	}

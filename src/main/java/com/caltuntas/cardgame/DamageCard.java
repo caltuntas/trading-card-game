@@ -17,6 +17,6 @@ public class DamageCard {
 
 	@Override
 	public String toString() {
-		return "DamageCard [manaCost=" + manaCost + ", hashCode()=" + hashCode() + "]";
+		return "DamageCard [manaCost=" + getManaCost() + ", hashCode()=" + hashCode() + "]";
 	}
 }
