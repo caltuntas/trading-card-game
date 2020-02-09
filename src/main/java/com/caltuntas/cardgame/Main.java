@@ -12,6 +12,8 @@ public class Main {
 			game.nextRound();
 		}
 
+		System.out.println("Game is over. Winner is....");
+		System.out.println(game.getWinner());
 	}
 
 }

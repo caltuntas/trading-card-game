@@ -108,4 +108,19 @@ public class GameTest {
 		assertTrue(game.isOver());
 	}
 
+	@Test
+	public void getWinner() {
+		GameView inputDevice = mock(GameView.class);
+		
+		Game game = new Game(inputDevice);
+		Player player1 = new Player(-1, 0, createTestDeck());
+		Player player2 = new Player(30, 0, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		game.start();
+		
+		assertTrue(game.isOver());
+		assertEquals(player2, game.getWinner());
+	}
+
 }

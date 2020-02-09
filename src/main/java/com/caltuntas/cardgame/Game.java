@@ -74,20 +74,25 @@ public class Game {
 		while (activePlayer.canPlay()) {
 			inputDevice.show("-----Active player-----");
 			inputDevice.show(getActivePlayer().toString());
+			inputDevice.show("-----Opponent player-----");
+			inputDevice.show(getOpponent().toString());
 			String command = this.inputDevice.getCommand();
 			if (command.equals("skip")) {
 				break;
 			} else if (command.startsWith("playWithCard")) {
 				String cardIndexString = command.substring("playWithCard".length());
 				int cardIndex = Integer.parseInt(cardIndexString);
-				DamageCard card = activePlayer.playWith(cardIndex);
-				opponent.hitBy(card);
+				if(activePlayer.canPlayWith(cardIndex)) {
+					DamageCard card = activePlayer.playWith(cardIndex);
+					opponent.hitBy(card);
+				}
 			}
 		} 
 		swapPlayers();
 	}
 
 	private void swapPlayers() {
+		inputDevice.show("Swapping players");
 		Player currentActivePlayer = getActivePlayer();
 		Player currentOpponent = getOpponent();
 		setActivePlayer(currentOpponent);
@@ -98,5 +103,12 @@ public class Game {
 		if (getActivePlayer().getHealth() <= 0 || getOpponent().getHealth() <= 0)
 			return true;
 		return false;
+	}
+
+	public Player getWinner() {
+		if(player1.getHealth()>player2.getHealth())
+			return player1;
+		else
+			return player2;
 	}
 }
