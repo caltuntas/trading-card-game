@@ -17,14 +17,14 @@ public class GameTest {
 	}
 
 	@Test
-	public void start() {
+	public void preparePlayers() {
 		Game game = new Game();
 		Player player1 = new Player(30, 0, createTestDeck());
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
 		
-		game.start();
+		game.preparePlayers();
 		assertEquals(player1, game.getActivePlayer());
 		assertEquals(1, player1.getMana());
 	}
@@ -39,7 +39,7 @@ public class GameTest {
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
-		game.start();
+		game.preparePlayers();
 		
 		game.nextRound();
 		assertEquals(player2, game.getActivePlayer());
@@ -55,7 +55,7 @@ public class GameTest {
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
-		game.start();
+		game.preparePlayers();
 		
 		game.nextRound();
 		assertTrue(game.getActivePlayer().getHealth()<30);
@@ -71,7 +71,7 @@ public class GameTest {
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
-		game.start();
+		game.preparePlayers();
 		
 		game.nextRound();
 		assertEquals(player2, game.getActivePlayer());
@@ -88,7 +88,7 @@ public class GameTest {
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
-		game.start();
+		game.preparePlayers();
 		
 		game.nextRound();
 		assertEquals(28,player2.getHealth());
@@ -112,7 +112,7 @@ public class GameTest {
 		Player player2 = new Player(30, 10, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
-		game.start();
+		game.preparePlayers();
 		
 		game.nextRound();
 		assertEquals(30,player2.getHealth());
@@ -128,7 +128,7 @@ public class GameTest {
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
-		game.start();
+		game.preparePlayers();
 		
 		assertTrue(game.isOver());
 		player1.setHealth(30);
@@ -145,7 +145,7 @@ public class GameTest {
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
-		game.start();
+		game.preparePlayers();
 		
 		assertFalse(game.isOver());
 	}
@@ -159,7 +159,7 @@ public class GameTest {
 		Player player2 = new Player(30, 0, createTestDeck());
 		game.setPlayer1(player1);
 		game.setPlayer2(player2);
-		game.start();
+		game.preparePlayers();
 		
 		assertTrue(game.isOver());
 		assertEquals(player2, game.getWinner());
@@ -167,5 +167,28 @@ public class GameTest {
 		player1.setHealth(30);
 		assertEquals(player1, game.getWinner());
 	}
+	
+	@Test
+	public void start() {
+		GameView inputDevice = mock(GameView.class);
+		Game game = new Game();
+		game.setInputDevice(inputDevice);
+		Player player1 = new Player(30, 0, createTestDeck());
+		Player player2 = new Player(30, 0, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		
+		Game spyGame = spy(game);
+
+	    doReturn(false,true).when(spyGame).isOver();
+	    doNothing().when(spyGame).nextRound();
+
+	  
+		
+		spyGame.start();
+		verify(inputDevice).show("Game is over. Winner is....");
+	}
+	
+	
 
 }

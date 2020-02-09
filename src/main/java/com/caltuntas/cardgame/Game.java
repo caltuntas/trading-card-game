@@ -3,6 +3,7 @@ package com.caltuntas.cardgame;
 import static com.caltuntas.cardgame.Commands.*;
 
 public class Game {
+	private static final String WINNER_HEADER = "Game is over. Winner is....";
 	private static final String SWAPPING_PLAYERS_HEADERS = "Swapping players";
 	private static final String OPPONENT_PLAYER_HEADER = "-----Opponent player-----";
 	private static final String ACTIVE_PLAYER_HEADER = "-----Active player-----";
@@ -70,9 +71,19 @@ public class Game {
 		this.opponent = opponent;
 	}
 
-	public void start() {
+	public void preparePlayers() {
 		setActivePlayer(player1);
 		setOpponent(player2);
+	}
+	
+	public void start() {
+		preparePlayers();
+		while(!isOver()) {
+			nextRound();
+		}
+
+		display(WINNER_HEADER);
+		display(getWinner().toString());
 	}
 
 	public void nextRound() {
