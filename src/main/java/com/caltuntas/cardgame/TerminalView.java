@@ -14,9 +14,9 @@ public class TerminalView implements GameView {
 		return command;
 	}
 
-	@Override
 	public void show(String text) {
 		System.out.println(text);		
 	}
+
 
 }

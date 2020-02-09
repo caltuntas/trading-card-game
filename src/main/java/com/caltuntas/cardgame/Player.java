@@ -78,14 +78,22 @@ public class Player {
 	}
 
 	public DamageCard playWith(int cardIndex) {
-		DamageCard cardToPlay = cardsOnHand.get(cardIndex);
-		if(cardToPlay.getManaCost()>getMana()) {
+		if(!canPlayWith(cardIndex)) {
 			throw new InvalidCard("Player doesn't have sufficient mana for the card.");
 		}
+		DamageCard cardToPlay = cardsOnHand.get(cardIndex);
 		int currentMana = getMana() - cardToPlay.getManaCost();
 		setMana(currentMana);
 		this.getCardsOnHand().remove(cardToPlay);
 		return cardToPlay;
+	}
+	
+	public boolean canPlayWith(int cardIndex) {
+		DamageCard cardToPlay = cardsOnHand.get(cardIndex);
+		if(cardToPlay.getManaCost()>getMana()) {
+			return false;			
+		}
+		return true;
 	}
 
 	public boolean canPlay() {
