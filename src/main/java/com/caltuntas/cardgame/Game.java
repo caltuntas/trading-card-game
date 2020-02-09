@@ -6,12 +6,12 @@ public class Game {
 	private Deck starterDeck;
 	private Player activePlayer;
 	private Player opponent;
-	private GameInterface inputDevice;
+	private GameView inputDevice;
 	
 	public Game() {
 		super();
 	}
-	public Game(GameInterface inputDevice) {
+	public Game(GameView inputDevice) {
 		this.inputDevice =inputDevice;
 	}
 	public Player getPlayer1() {
@@ -40,10 +40,10 @@ public class Game {
 		this.activePlayer.activate();
 	}
 	
-	public GameInterface getInputDevice() {
+	public GameView getInputDevice() {
 		return inputDevice;
 	}
-	public void setInputDevice(GameInterface inputDevice) {
+	public void setInputDevice(GameView inputDevice) {
 		this.inputDevice = inputDevice;
 	}
 	public Player getOpponent() {
@@ -57,6 +57,7 @@ public class Game {
 		setOpponent(player2);
 	}
 	public void progress() {
+		inputDevice.show("Active player : " + getActivePlayer());
 		String command = this.inputDevice.getCommand();
 		if(command.equals("skip")) {
 			swapPlayers();

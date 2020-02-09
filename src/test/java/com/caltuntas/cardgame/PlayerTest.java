@@ -114,7 +114,7 @@ public class PlayerTest {
 		List<DamageCard> cardsOnHand = Deck.createWithManaCosts(1,1,1,1,1,1).getCards();
 		player.setCardsOnHand(cardsOnHand);
 		String str = player.toString();
-		assertTrue(str.contains("Player [health=30, mana=10"));
+		assertTrue(str.contains("Player [name=null, health=30, mana=10"));
 		assertTrue(str.contains(player.getDeck().toString()));
 	}
 

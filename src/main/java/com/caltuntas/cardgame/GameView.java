@@ -1,5 +1,6 @@
 package com.caltuntas.cardgame;
 
-public interface GameInterface {
+public interface GameView {
 	String getCommand();
+	void show(String text);
 }

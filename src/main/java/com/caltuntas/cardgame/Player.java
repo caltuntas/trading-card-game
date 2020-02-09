@@ -6,6 +6,7 @@ import java.util.List;
 public class Player {
 	private int health;
 	private int mana;
+	private String name;
 	private Deck deck;
 	private List<DamageCard> cardsOnHand = new ArrayList<DamageCard>();
 
@@ -32,8 +33,8 @@ public class Player {
 	}
 
 	public void activate() {
-		this.mana += 1;		
-		if(getCardsOnHand().size()<=0 && deck.getDamageCardCount()<=0) {
+		this.mana += 1;
+		if (getCardsOnHand().size() <= 0 && deck.getDamageCardCount() <= 0) {
 			this.health--;
 			return;
 		}
@@ -56,20 +57,28 @@ public class Player {
 		this.cardsOnHand = cardsOnHand;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void drawCards(int cardCount) {
-        List<DamageCard> cards = this.deck.drawRandom(cardCount);
-        if(cards.size()+getCardsOnHand().size()<=5) {
-			getCardsOnHand().addAll(cards);		
-        }
+		List<DamageCard> cards = this.deck.drawRandom(cardCount);
+		if (cards.size() + getCardsOnHand().size() <= 5) {
+			getCardsOnHand().addAll(cards);
+		}
 	}
 
 	public void hitBy(DamageCard card) {
 		int healthAfterDamage = getHealth() - card.getManaCost();
-		setHealth(healthAfterDamage);		
+		setHealth(healthAfterDamage);
 	}
 
 	public DamageCard playWith(int cardIndex) {
-		DamageCard cardToPlay = cardsOnHand.get(cardIndex);		
+		DamageCard cardToPlay = cardsOnHand.get(cardIndex);
 		int currentMana = getMana() - cardToPlay.getManaCost();
 		setMana(currentMana);
 		this.getCardsOnHand().remove(cardToPlay);
@@ -78,7 +87,7 @@ public class Player {
 
 	public boolean canPlay() {
 		for (DamageCard damageCard : cardsOnHand) {
-			if(getMana()>=damageCard.getManaCost())
+			if (getMana() >= damageCard.getManaCost())
 				return true;
 		}
 		return false;
@@ -87,23 +96,21 @@ public class Player {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		String playerString = "Player [health=" + health + ", mana=" + mana + ", hashCode()=" + hashCode() + "]";
+		String playerString = "Player [name=" + name + ", health=" + health + ", mana=" + mana + ", cardsOnHand.size="
+				+ cardsOnHand.size() +", deck.size="+ deck.getDamageCardCount() + ", hashCode()=" + hashCode() + "]";
 		stringBuilder.append(playerString);
 		String newLine = System.getProperty("line.separator");
 		stringBuilder.append(newLine);
 		for (DamageCard damageCard : cardsOnHand) {
-			stringBuilder.append(damageCard.toString());			
+			stringBuilder.append(damageCard.toString());
 			stringBuilder.append(newLine);
 		}
-		
+
 		stringBuilder.append(newLine);
 		stringBuilder.append(getDeck().toString());
 
 		return stringBuilder.toString();
 	}
 
-	
-	
-	
-	//TODO: check if played card's mana cost is greater than player's current mana
+	// TODO: check if played card's mana cost is greater than player's current mana
 }
