@@ -189,6 +189,24 @@ public class GameTest {
 		verify(inputDevice).show("Game is over. Winner is....");
 	}
 	
+	@Test
+	public void playerGivesInvalidCommand() {
+		GameView inputDevice = mock(GameView.class);
+		
+		when(inputDevice.getCommand()).thenReturn("InvalidCommand", SKIP_COMMAND);
+		Game game = new Game(inputDevice);
+		Player player1 = new Player(30, 0, createTestDeck());
+		Player player2 = new Player(30, 0, createTestDeck());
+		game.setPlayer1(player1);
+		game.setPlayer2(player2);
+		game.preparePlayers();
+		
+		game.nextRound();
+		
+		verify(inputDevice).show("Invalid command! Valid commands : skip, playWithCard[cardNumber]");		
+		assertEquals(player2, game.getActivePlayer());
+	}
+	
 	
 
 }
