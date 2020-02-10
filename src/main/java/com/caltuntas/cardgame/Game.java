@@ -85,10 +85,7 @@ public class Game {
 
 	public void nextRound() {
 		while (activePlayer.canPlay()) {
-			display(ACTIVE_PLAYER);
-			display(getActivePlayer().toString());
-			display(OPPONENT_PLAYER);
-			display(getOpponent().toString());
+			displayPlayers();
 			String command = getInputDevice().getCommand();
 			if (command.equals(Commands.SKIP_COMMAND)) {
 				break;
@@ -104,6 +101,13 @@ public class Game {
 			}
 		} 
 		swapPlayers();
+	}
+
+	private void displayPlayers() {
+		display(ACTIVE_PLAYER);
+		display(getActivePlayer().toString());
+		display(OPPONENT_PLAYER);
+		display(getOpponent().toString());
 	}
 
 	private void swapPlayers() {
