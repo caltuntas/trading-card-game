@@ -10,9 +10,9 @@ In order to run trading card game, As a prerequisite, JRE8 must be installed on 
 
 ## Installation
 
-You can download [latest release]https://github.com/caltuntas/trading-card-game/releases/latest and run it by
+You can download [latest release](https://github.com/caltuntas/trading-card-game/releases/latest) and run it by
 
-`java -jar trading-card-game-1.0.0` 
+`java -jar trading-card-game-1.0.0.jar` 
 
 ### Building From Source Code
 First, make sure you have following software installed on your computer
